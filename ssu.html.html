@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏫 숭실대 기숙사 학식 가이드</title>
+    <style>
+        :root {
+            --primary-color: #0f172a;       /* 세련된 다크 네이비 */
+            --accent-color: #2563eb;        /* 숭실대 상징 블루 */
+            --background-color: #f8fafc;    /* 차분한 연그레이 */
+            --card-color: #ffffff;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+            --lunch-color: #f59e0b;
+            --dinner-color: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* 스마트폰 화면 크기로 고정하는 앱 컨테이너 */
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            background-color: #ffffff;
+            min-height: 100vh;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* 헤더 영역 */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+        }
+
+        header p {
+            margin: 6px 0 0 0;
+            font-size: 0.95rem;
+            color: #94a3b8;
+        }
+
+        /* 요일 선택 탭 */
+        .day-tabs {
+            display: flex;
+            padding: 12px 16px;
+            gap: 6px;
+            background-color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .tab-btn {
+            flex: 1;
+            border: none;
+            background-color: #f1f5f9;
+            padding: 12px 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text-sub);
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            background-color: #e2e8f0;
+        }
+
+        .tab-btn.active {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        /* 메인 콘텐츠 영역 */
+        main {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .section-title {
+            margin: 0 0 4px 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* 식단 카드 디자인 */
+        .menu-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            border-bottom: 1px dashed #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .badge.lunch { background-color: var(--lunch-color); }
+        .badge.dinner { background-color: var(--dinner-color); }
+
+        .time-info {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            font-weight: 500;
+        }
+
+        .menu-text {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.6;
+            color: var(--text-main);
+            white-space: pre-line; /* \n 줄바꿈 문자 적용 활성화 */
+        }
+
+        /* 하단 공식 홈페이지 링크 바 */
+        footer {
+            padding: 20px;
+            text-align: center;
+            background-color: #f1f5f9;
+            margin-top: auto;
+        }
+
+        .official-link {
+            display: inline-block;
+            padding: 10px 16px;
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .official-link:hover {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <h1>🏫 숭실대 기숙사 식단표</h1>
+            <p id="current-date">0000년 00월 00일</p>
+        </header>
+
+        <nav class="day-tabs">
+            <button class="tab-btn" data-day="월">월</button>
+            <button class="tab-btn" data-day="화">화</button>
+            <button class="tab-btn" data-day="수">수</button>
+            <button class="tab-btn" data-day="목">목</button>
+            <button class="tab-btn" data-day="금">금</button>
+        </nav>
+
+        <main>
+            <h2 id="selected-day-title" class="section-title">오늘의 식단</h2>
+            
+            <div class="menu-card">
+                <div class="card-header">
+                    <span class="badge lunch">☀️ 중식</span>
+                    <span class="time-info">11:35 ~ 13:30</span>
+                </div>
+                <p id="lunch-menu" class="menu-text">식단을 불러오는 중...</p>
+            </div>
+
+            <div class="menu-card">
+                <div class="card-header">
+                    <span class="badge dinner">🌙 석식</span>
+                    <span class="time-info">17:30 ~ 19:00</span>
+                </div>
+                <p id="dinner-menu" class="menu-text">식단을 불러오는 중...</p>
+            </div>
+        </main>
+
+        <footer>
+            <a href="http://ssudorm.ssu.ac.kr/SShostel/mall_main.php?viewform=B0001_foodboard_list&gyear=2026&gmonth=05&gday=28" 
+               target="_blank" 
+               class="official-link">
+               🌐 숭실대 생활관 공식 식단표 바로가기
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        // 🛠️ [중요] 매주 일요일/월요일에 학교 사이트를 보시고 아래 텍스트만 고쳐서 Push 하시면 자동 업데이트됩니다!
+        // 반찬이 바뀔 때 줄바꿈을 원하시면 텍스트 사이에 \n 을 넣어주세요.
+        const menuData = {
+            "월": {
+                lunch: "동인동식 매운갈비찜\n쌀밥\n맑은 콩나물국\n감자채볶음\n포기김치",
+                dinner: "수제 등심돈까스\n데미그라스 소스\n스프 & 모닝빵\n양배추 샐러드\n깍두기"
+            },
+            "화": {
+                lunch: "닭다리 삼계탕\n찹쌀밥\n오징어 초무침\n석박지\n요구르트",
+                dinner: "스팸 마요 덮밥\n가쓰오 장국\n떡볶이\n단무지 무침\n포기김치"
+            },
+            "수": {
+                lunch: "우삼겹 된장찌개\n고등어 구이\n상추겉절이\n배추김치",
+                dinner: "소고기 버섯 잡채밥\n계란 파국\n짜조 튀김\n짜사이 무침\n포기김치"
+            },
+            "목": {
+                lunch: "치즈 닭갈비\n볶음밥용 공기밥\n유부 우동국물\n마카로니 샐러드\n무쌈",
+                dinner: "얼큰 부대찌개\n라면사리 & 햄 모둠\n계란말이\n김구이\n깍두기"
+            },
+            "금": {
+                lunch: "바베큐 폭립\n버터 볶음밥\n크림스프\n가든 샐러드\n피클 & 김치",
+                dinner: "얼큰 소고기 국밥\n소면사리\n두부 부침\n부추 무침\n석박지"
+            }
+        };
+
+        // 2. 날짜 연산 및 오늘 요일 추출
+        const today = new Date();
+        const formattedDate = `${today.getFullYear()}년 ${String(today.getMonth() + 1).padStart(2, '0')}월 ${String(today.getDate()).padStart(2, '0')}일`;
+        
+        const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
+        let currentDay = weekDays[today.getDay()];
+
+        // 토요일, 일요일 등 주말인 경우 기본 활성화를 '월요일'로 맞춥니다.
+        if (currentDay === '일' || currentDay === '토') {
+            currentDay = '월';
+        }
+
+        // 3. UI 렌더링 함수
+        function selectDayMenu(day) {
+            document.getElementById('selected-day-title').innerText = `${day}요일 전체 메뉴`;
+            
+            const selectedMenu = menuData[day];
+            if (selectedMenu) {
+                document.getElementById('lunch-menu').innerText = selectedMenu.lunch;
+                document.getElementById('dinner-menu').innerText = selectedMenu.dinner;
+            } else {
+                document.getElementById('lunch-menu').innerText = "식단 정보가 없습니다.";
+                document.getElementById('dinner-menu').innerText = "식단 정보가 없습니다.";
+            }
+
+            // 활성화된 탭 스타일링 변경 처리
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.getAttribute('data-day') === day) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        // 4. 앱 초기화 실행 및 이벤트 바인딩
+        document.getElementById('current-date').innerText = formattedDate;
+        selectDayMenu(currentDay);
+
+        // 요일 탭 버튼들에 클릭 동작 할당
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', (event) => {
+                const clickedDay = event.target.getAttribute('data-day');
+                selectDayMenu(clickedDay);
+            });
+        });
+    </script>
+</body>
+</html>
